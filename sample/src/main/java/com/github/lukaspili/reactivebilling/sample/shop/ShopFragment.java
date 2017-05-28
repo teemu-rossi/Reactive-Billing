@@ -120,7 +120,7 @@ public class ShopFragment extends Fragment implements TabsAdapter.Tab {
                                                 return purchaseResponse;
                                             } else {
                                                 // you would probably want to have something better in a real world app
-                                                return new PurchaseResponse(consumeResponse.getResponseCode(), null, null, null, false);
+                                                return new PurchaseResponse(consumeResponse.getResponseCode(), null, null, null, null, false);
                                             }
                                         }
                                     });

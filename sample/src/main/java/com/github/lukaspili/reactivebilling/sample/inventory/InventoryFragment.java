@@ -18,6 +18,7 @@ import com.github.lukaspili.reactivebilling.ReactiveBilling;
 import com.github.lukaspili.reactivebilling.model.Purchase;
 import com.github.lukaspili.reactivebilling.model.PurchaseType;
 import com.github.lukaspili.reactivebilling.response.GetPurchasesResponse;
+import com.github.lukaspili.reactivebilling.response.PurchaseResponse;
 import com.github.lukaspili.reactivebilling.response.Response;
 import com.github.lukaspili.reactivebilling.sample.R;
 import com.github.lukaspili.reactivebilling.sample.TabsAdapter;
@@ -128,9 +129,9 @@ public class InventoryFragment extends Fragment implements TabsAdapter.Tab {
     private void didSucceedGetPurchases(GetPurchasesResponse getPurchasesResponse) {
         if (getPurchasesResponse.isSuccess()) {
             Observable.from(getPurchasesResponse.getList())
-                    .map(new Func1<GetPurchasesResponse.PurchaseResponse, Purchase>() {
+                    .map(new Func1<PurchaseResponse, Purchase>() {
                         @Override
-                        public Purchase call(GetPurchasesResponse.PurchaseResponse purchaseResponse) {
+                        public Purchase call(PurchaseResponse purchaseResponse) {
                             return purchaseResponse.getPurchase();
                         }
                     })

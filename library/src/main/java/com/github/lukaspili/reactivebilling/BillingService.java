@@ -14,6 +14,7 @@ import com.github.lukaspili.reactivebilling.parser.SkuDetailsParser;
 import com.github.lukaspili.reactivebilling.response.GetBuyIntentResponse;
 import com.github.lukaspili.reactivebilling.response.GetPurchasesResponse;
 import com.github.lukaspili.reactivebilling.response.GetSkuDetailsResponse;
+import com.github.lukaspili.reactivebilling.response.PurchaseResponse;
 import com.github.lukaspili.reactivebilling.response.Response;
 
 import java.util.ArrayList;
@@ -66,12 +67,14 @@ public class BillingService {
         List<String> purchases = bundle.getStringArrayList("INAPP_PURCHASE_DATA_LIST");
         List<String> signatures = bundle.getStringArrayList("INAPP_DATA_SIGNATURE_LIST");
 
-        List<GetPurchasesResponse.PurchaseResponse> purchaseResponses = new ArrayList<>();
+        List<PurchaseResponse> purchaseResponses = new ArrayList<>();
         if (productsIds != null && purchases != null && signatures != null) {
             for (int i = 0; i < productsIds.size(); i++) {
                 purchaseResponses.add(
-                    new GetPurchasesResponse.PurchaseResponse(productsIds.get(i), signatures.get(i),
-                        PurchaseParser.parse(purchases.get(i))));
+                    new PurchaseResponse(
+                    		response, PurchaseParser.parse(purchases.get(i)),
+							purchases.get(i), signatures.get(i), null, false
+						));
             }
         }
 
